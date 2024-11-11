@@ -1,0 +1,46 @@
+@import "../../scss/variable";
+.header {
+  text-align: center;
+  margin: 1rem;
+  padding: 0.5rem;
+  margin-top: 10rem;
+
+  .title {
+
+animation:yanarSoner 0.5s infinite ease-in-out alternate;
+// ease-in-out (olmazsa hızlı geçiş olur)  alternate (olmazsa kalp atışı gibi sert geçiş olur); beraberce yavaşlığı sağlıyor, birden geçiş olmuyor, infinite, sayfa kapanana kadar sonsuz kendi kendine istediğiniz animation neyse devam etsin
+
+    text-transform: uppercase;
+    text-decoration: underline;
+    font-size: 3rem;
+    letter-spacing: 0.2rem;
+    color: $cardNavBgColor;
+ // hover durumunda olacaklar yavaşça 0.5 saniye içinde olsun
+    transition:all 0.5s ease-in-out;
+
+    &:hover {
+      color: black;
+      cursor: pointer;
+    }
+
+   
+  }
+
+
+  @keyframes yanarSoner{
+
+0%{
+    opacity:0.5;
+    text-shadow: 2px 2px 10px orange;
+}
+
+100%{
+
+    opacity:0.9;
+    text-shadow: 2px 2px 10px orange;
+}
+
+  }
+
+
+}

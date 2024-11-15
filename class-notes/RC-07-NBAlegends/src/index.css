@@ -1,0 +1,43 @@
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+}
+
+body{
+    background-color: rgb(232, 154, 154);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;}
+
+.kartContainer{
+    background-image: url("https://p4.wallpaperbetter.com/wallpaper/661/973/110/cool-nba-logo-wallpaper-preview.jpg");
+
+    padding: 1rem;
+    display: flex;
+    justify-content: center;
+ 
+}
+
+.player-kart{
+    height: 400px;
+    transition: transfrom 1s ease-in-out;
+    gap: 1rem;
+    min-width: 180px;
+}
+
+.player-resim{
+    height: 350px;
+    object-fit: cover;
+}
+
+.player-kart:hover .player-resim{
+    transform: scale(0.95);
+}
+
+ul{
+    height: 350px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+}

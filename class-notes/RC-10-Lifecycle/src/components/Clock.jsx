@@ -3,43 +3,34 @@
 // İkinci argüman olarak verilen bir bağımlılık dizisi (dependency array) sayesinde useEffect, ne zaman çalışacağını belirler.
 // Eğer dependency array verilmezse, sonsuz döngü oluşabilir, çünkü her render'da useEffect tekrar çalışır.
 
-
-
-
 import React, { useEffect, useState } from "react";
 import moment from "moment";
 
 const Clock = () => {
   const [zaman, setZaman] = useState(moment());
- const [count,setCount]=useState(0)
-//   setInterval(()=>{ 
-//     console.log("artış var")
-//     setZaman(moment())  
-// },1000)
+  const [count, setCount] = useState(0);
+/* -------------------------------------------------------------------------- */
+  //! Component Did Mount işlemi
+  // Yeni Hook useEffect hook
 
-//! Component Did Mount işlemi
-// Yeni Hook useEffect hook
-
+  useEffect(() => {
+    const timer = setInterval(() => {
+      console.log("artış var");
+      setZaman(moment());
+    }, 1000);
+/* -------------------------------------------------------------------------- */
+ //! ComponentWillUnmount
+    //COmponenti öldürdük
+    return () => {
+      clearInterval(timer);
+    };
+  }, []);
+  // Köşeli parantez kullanımı bir defa render ediyor demektir.
+/* -------------------------------------------------------------------------- */
+//! Component Did Update karılığı olarakda useEffect kullanıyoruz
 useEffect(()=>{
-     const timer= setInterval(()=>{ 
-    console.log("artış var")
-     setZaman(moment())  
-},1000)
-
-//! ComponentWillUnmount
-//COmponenti öldürdük
-return ()=>{
-    clearInterval(timer)
-}
-
-
-},[])
-
-// Köşeli parantez kullanımı bir defa render ediyor demektir.
-
-useEffect(()=>{},[count])
-
-
+    console.log("DidUpdate ÇAlıştı")
+},[count])
 
   return (
     <div>
@@ -51,19 +42,21 @@ useEffect(()=>{},[count])
           <p className="text-center text-muted">Anlık Saat</p>
         </div>
       </div>
-    <p>**************************</p>
-    <div className="container d-flex justify-content-center mt-3 w-50">
+      <p>**************************</p>
+      <div className="container d-flex justify-content-center mt-3 w-50">
         <div className="card shadow-lg p-4 rounded">
           <h1 className="display-4 text-center text-primary">
             Counter:{count}
           </h1>
-         <button className="btn btn-success">+</button>
+          <button
+            className="btn btn-success"
+            onClick={() => setCount(count + 1)}
+          >
+            +
+          </button>
         </div>
       </div>
-
     </div>
-
-   
   );
 };
 

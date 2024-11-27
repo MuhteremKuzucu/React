@@ -1,9 +1,9 @@
 import React  from "react";
-const EditBilgi = () => {
+const EditBilgi = ({updateBilgi, setUpdateBilgi,putBilgi}) => {
 
-
+ 
   
-
+// updateBilgi ile gelen bilgileri input ta value ile gösterdik, setUpdateBilgi ile de içini değiştirdik. buradaki div in id si ile, BilgiList teki buton (icon) un data-bs-target ismi aynı AiOutlineUserAdd, o buton tıklanınca bu div modal çalışır
   
  
 
@@ -38,7 +38,10 @@ const EditBilgi = () => {
                 type="text"
                 className="form-control"
                 id="title"
-           
+                value={updateBilgi.title}
+                onChange={(e) =>
+                  setUpdateBilgi({ ...updateBilgi, title: e.target.value })
+                }
               />
             </div>
             <div className="mb-3">
@@ -47,8 +50,10 @@ const EditBilgi = () => {
                 type="text"
                 id="desc"
                 className="form-control"
-               
-                
+                value={updateBilgi.description}
+                onChange={(e) =>
+                  setUpdateBilgi({ ...updateBilgi, description: e.target.value })
+                }
               />
             </div>
           </div>
@@ -57,6 +62,7 @@ const EditBilgi = () => {
               type="button"
               class="btn btn-secondary"
               data-bs-dismiss="modal"
+              onClick={()=>putBilgi(updateBilgi)}
             >
               Save
             </button>

@@ -8,27 +8,54 @@ const Home = () => {
   const url = "https://tutorial-api.fullstack.clarusway.com/tutorials/";
 
   //!GET (READ)
+  const getBilgiler = async () => {
+    const res = await axios.get(url);
+    console.log(res.data);
 
+    setTutorials(res.data);
+  };
 
-
- 
+  useEffect(() => {
+    getBilgiler();
+  }, []);
 
   //!POST (create database e veri gönderme)
 
- 
+  const postBilgi = async (yeniVeri) => {
+    await axios.post(url, yeniVeri);
 
-//!DELETE (database den silme)
+    getBilgiler();
+  };
 
+  //!DELETE (database den silme)
 
+  const deleteBilgi = async (id) => {
+    // console.log(id);
 
+    await axios.delete(`${url}${id}/`);
 
+    getBilgiler();
+  };
 
-  return <>
+  //!put update işlemi
 
- Home
+  const putBilgi = async (yeniVeri) => {
+    await axios.put(`${url}${yeniVeri.id}/`, yeniVeri);
 
+    getBilgiler();
+  };
 
-  </>;
+  return (
+    <>
+      <AddBilgi postBilgi={postBilgi} />
+
+      <BilgiList
+        tutorials={tutorials}
+        deleteBilgi={deleteBilgi}
+        putBilgi={putBilgi}
+      />
+    </>
+  );
 };
 
 export default Home;

@@ -21,7 +21,7 @@ const CourseCard = () => {
                 <Card.Text>{a.text}</Card.Text>
                 <Button
                  onClick={()=>navigasyon(`/courses/${a.name}`)}
-                 variant="primary">Go somewhere</Button>
+                 variant="primary">DETAILS</Button>
               </Card.Body>
             </Card>
           </Col>

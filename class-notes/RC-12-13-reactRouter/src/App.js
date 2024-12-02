@@ -9,29 +9,13 @@ import ContactForm from './pages/ContactForm';
 import Paths from './pages/Paths';
 import Footer from './components/Footer';
 import CardDetails from './pages/CardDetails';
+import TeacherDetails from './pages/TeacherDetails';
+import AppRouter from './router/AppRouter';
 
 const App = () => {
   return (
     <div>
-      <Router>
-
-      <MyNavbar/>
-
-      <Routes>
-        
-        <Route path="/" element={<Home/>}/>
-        <Route path="/teacher" element={<Teacher/>}/>
-        <Route path="/courses" element={<CourseCard/>}/>
-        <Route path="/courses/:namee" element={<CardDetails/>}/>
-        
-        <Route path="/contact" element={<ContactForm/>}/>
-        <Route path="/paths" element={<Paths/>}/>
-
-      </Routes>
-
-      <Footer/>
-
-      </Router>
+      <AppRouter/>
     </div>
   )
 }

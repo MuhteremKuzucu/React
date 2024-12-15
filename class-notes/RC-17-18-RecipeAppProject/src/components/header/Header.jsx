@@ -29,7 +29,7 @@ const Header = () => {
           placeholder="search"
           onChange={(e)=>setQuery(e.target.value) } 
         />
-
+         
         <Button type="submit"> Search</Button>
 
         <Select

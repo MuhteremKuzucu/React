@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Özelleştirilmiş sınıflar oluşuturyoruz */
+@layer components{
+    .anasayfaGrid{
+        @apply grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-5
+    }
+}
+
+
+/* html etiketlerini özelleştirebiliyoruz */
+@layer base{
+    h1{
+        @apply text-center bg-slate-400 m-2 p-2
+    }
+}
+

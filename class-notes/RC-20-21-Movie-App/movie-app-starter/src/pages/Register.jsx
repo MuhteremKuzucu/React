@@ -1,7 +1,9 @@
-import React from "react";
+ import React, { useState } from "react";
 import GoogleIcon from "../assets/icons/GoogleIcon";
 
 const Register = () => {
+
+  const [email,setEmail]=useState()
 
 
 

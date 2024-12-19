@@ -9,9 +9,9 @@ const Home = () => {
     <>
 
     {/* <Navbar/> */}
-    {/* <TypoButtons/> */}
-    {/* <TextFieldComp/> */}
-    <CardGrid/>
+   {/* <TypoButtons/> */}
+   {/* <TextFieldComp/> */}
+<CardGrid/>
 
 
     </>

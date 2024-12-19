@@ -1,4 +1,14 @@
-import { Button, Card, CardActions, CardContent, CardMedia, Container, Grid, Typography } from "@mui/material";
+import {
+  Card,
+  CardActions,
+  CardContent,
+  CardMedia,
+  Container,
+  Grid,
+  Typography,
+  Button,
+} from "@mui/material";
+
 import React, { useEffect, useState } from "react";
 
 const CardGrid = () => {
@@ -13,13 +23,13 @@ const CardGrid = () => {
   return (
     <Container>
       <Typography variant="h4" align="center" color="error">
-        CARD-GRİD
+        CARD-GRID
       </Typography>
       {/* spacing={2} card lar arası 2 birim boşluk */}
       <Grid container spacing={2}>
         {products.map((a) => (
           <Grid key={a.id} item xs={6} md={4}>
-            <Card sx={{ maxWidth: 345 }}>
+            <Card sx={{ maxWidth: 345, height: 450 }}>
               <CardMedia
                 sx={{ height: 140 }}
                 image={a.images[0]}
@@ -27,15 +37,19 @@ const CardGrid = () => {
               />
               <CardContent>
                 <Typography gutterBottom variant="h5" component="div">
-                  Lizard
+                  {a.title}
                 </Typography>
                 <Typography variant="body2" sx={{ color: "text.secondary" }}>
                   {a.description}
                 </Typography>
               </CardContent>
               <CardActions>
-                <Button variant="contained" size="small">Share</Button>
-                <Button variant="outlined" size="small">Learn More</Button>
+                <Button variant="contained" size="small">
+                  Share
+                </Button>
+                <Button variant="outlined" size="small">
+                  Learn More
+                </Button>
               </CardActions>
             </Card>
           </Grid>

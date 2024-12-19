@@ -1,12 +1,11 @@
 import React from 'react'
 import {Box, Button, Container, Typography} from "@mui/material"
-import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import SendIcon from '@mui/icons-material/Send';
-
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 const TypoButtons = () => {
   return (
     <div>
-       <Container maxWidth="md" sx={{ background: "red" }}>
+      <Container maxWidth="md" sx={{ background: "red" }}>
         {/* maxWidth="md" width en fazla md büyüklükte olsun.  gutterBottom={true}
       alttan margin. component attribute ü  sadece console da etkilidir , görüntü yine variant neyse odur*/}
         <Typography variant="h1" component="h2">
@@ -33,12 +32,12 @@ const TypoButtons = () => {
         <Typography variant="button"> bu bir span etiketidir</Typography>
       </Container>
 
-      <Box sx={{marginTop:4, display:"flex", flexDirection:"column", gap:2}}>
-      <Button endIcon={<DeleteForeverIcon/>} color="success" sx={{color:"aqua"}} variant="contained">Contained</Button>
-      <Button startIcon={<SendIcon/>} color="error" variant="outlined">SEND</Button>
+      <Box sx={{marginTop:4, display:"flex",  flexDirection:"column",gap:2}}>
+        
+        <Button endIcon={<DeleteForeverIcon/>}  color="success" sx={{color:"aqua"}}    variant="contained">DELETE</Button>
+       
+        <Button color="error" variant="outlined" startIcon={<SendIcon/>}>SEND</Button>
       </Box>
-
-
     </div>
   );
 }

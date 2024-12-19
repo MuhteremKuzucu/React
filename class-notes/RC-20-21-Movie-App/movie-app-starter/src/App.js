@@ -9,8 +9,8 @@ const App = () => {
     <div className="dark:bg-[#23242a] min-h-screen">
 
       <AuthContext>
-       <AppRouter/>
-       <ToastContainer/>
+        <AppRouter/>
+        <ToastContainer/>
       </AuthContext>
       
  

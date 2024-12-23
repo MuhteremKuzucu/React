@@ -2,6 +2,7 @@ import { Fragment, useContext } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { Link } from "react-router-dom";
 import avatar from "../assets/icons/avatar.png";
+import { YetkiContext } from "../context/AuthContext";
 
 
 //tailwindui.com/components/preview navigation, mobile menu button, open, Disclosure.Panel sil
@@ -12,6 +13,8 @@ function classNames(...classes) {
 
 export default function Navbar() {
 
+  const{cikis,currentUser}=useContext(YetkiContext)
+// console.log(currentUser);
 
   // referrerPolicy = "no-referrer"; google dan gelen resimde bazen sıkıntı oluyor, olmasın diye
   return (
@@ -25,12 +28,14 @@ export default function Navbar() {
             <Link className="pr-2 text-2xl font-semibold" to="/">
               React Movie App
             </Link>
+
             <div className="absolute inset-y-0 right-0 flex items-center">
+              <h5 className="mr-2 capitalize">{currentUser?.displayName} </h5>
               <Menu as="div" className="relative ml-3">
                 <Menu.Button className="flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                   <img
                     className="h-8 w-8 rounded-full"
-                    src={avatar}
+                    src={currentUser?.photoURL||avatar}
                     referrerPolicy="no-referrer"
                     alt=""
                   />
@@ -81,7 +86,7 @@ export default function Navbar() {
                             active ? "bg-gray-100" : "",
                             "block px-4 py-2 text-sm text-gray-700 cursor-pointer"
                           )}
-                      
+                          onClick={cikis}
                         >
                           Log out
                         </span>

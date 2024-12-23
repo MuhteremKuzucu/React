@@ -4,22 +4,24 @@ import { YetkiContext } from "../context/AuthContext";
 
 const Register = () => {
 
-  const[email,setEmail]=useState()
-  const[password,setPassword]=useState()
-  const[firstName,setFirstName]=useState()
-  const[lastName,setLastName]=useState()
+const[email,setEmail]=useState()
+const[password,setPassword]=useState()
+const[firstName,setFirstName]=useState()
+const[lastName,setLastName]=useState()
+
+const{createKullanici,signUpGooglE}=useContext(YetkiContext)
+
+  //handleSubmit=> createKullanici(email,password)
+const handleSubmit=(e)=>{
+e.preventDefault()
 
 
-  const{createKullanıcı,signUpGooglE}=useContext(YetkiContext)
+//?navbarda firstname, lastname bastırmak istiyoruz, bunlar google la giriş yapıldığında displayName olarak geçiyor, kendimiz giriş yaptığımızda da aynı ismi verelim, navbarda displayName deyince basılmış olsun diye
+const displayName=`${firstName} ${lastName}`
 
+createKullanici(email,password,displayName)
 
-  const handleSubmit=(e)=>{
-    e.preventDefault()
-
-    createKullanıcı(email,password)
-  }
-
-
+}
 
   return (
     <div className="overflow-hidden flex-1 h-screen justify-center items-center bg-[#23242a]">
@@ -36,8 +38,7 @@ const Register = () => {
               class=" peer"
               placeholder=" "
               required
-              onChange={(e)=>setFirstName(e.target.value)}
-           
+              onChange={(e) => setFirstName(e.target.value)}
             />
             <label htlmFor="floating_text" className="">
               First Name
@@ -50,8 +51,7 @@ const Register = () => {
               name="floating_text"
               type="text"
               required
-              onChange={(e)=>setLastName(e.target.value)}
-             
+              onChange={(e) => setLastName(e.target.value)}
             />
             <label htmlFor="floating_text">Last Name</label>
           </div>
@@ -62,8 +62,7 @@ const Register = () => {
               name="floating_email"
               type="email"
               required
-              onChange={(e)=>setEmail(e.target.value)}
-            
+              onChange={(e) => setEmail(e.target.value)}
             />
             <label htmlFor="floating_email">Email</label>
           </div>
@@ -74,8 +73,7 @@ const Register = () => {
               name="floating_password"
               type="password"
               required
-              onChange={(e)=>setPassword(e.target.value)}
-          
+              onChange={(e) => setPassword(e.target.value)}
             />
             <label htmlFor="floating_password">Password</label>
           </div>
@@ -86,7 +84,6 @@ const Register = () => {
             type="button"
             className="btn-danger flex justify-between text-center "
             onClick={()=>signUpGooglE()}
-          
           >
             Continue with Google
             <GoogleIcon color="currentColor" />

@@ -10,7 +10,7 @@ const Register = () => {
   const[lastName,setLastName]=useState()
 
 
-  const{createKullanıcı}=useContext(YetkiContext)
+  const{createKullanıcı,signUpGooglE}=useContext(YetkiContext)
 
 
   const handleSubmit=(e)=>{
@@ -85,6 +85,7 @@ const Register = () => {
           <button
             type="button"
             className="btn-danger flex justify-between text-center "
+            onClick={()=>signUpGooglE()}
           
           >
             Continue with Google

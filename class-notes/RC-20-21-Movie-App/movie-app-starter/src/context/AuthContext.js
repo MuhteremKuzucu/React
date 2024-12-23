@@ -1,8 +1,8 @@
 import React, { createContext } from 'react';
-import {createUserWithEmailAndPassword, signInWithEmailAndPassword,
+import {createUserWithEmailAndPassword, GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup,
 } from "firebase/auth";
 import { auth } from "../auth/firebase";
-import { successToast } from '../helpers/ToastNotify';
+import { errorToast, successToast } from '../helpers/ToastNotify';
 import { useNavigate } from "react-router-dom";
 
 
@@ -17,28 +17,70 @@ const AuthContext = ({children}) => {
    //!register için (sitede zincir yapılı fetch işlemi var biz burada async await i tercih ettik)
    //firebase.google.com/docs/auth/web/start?hl=tr
 
-   const createKullanici=async(email,password)=>{
+  const createKullanici=async(email,password)=>{
 
-    await createUserWithEmailAndPassword(auth,email,password)
+    try {
+      await createUserWithEmailAndPassword(auth,email,password)
 
-    successToast("Kayıt başarılı")
+      successToast("Kayıt başarılı")
+  
+      navigate("/")
 
-    navigate("/")
+    } catch (error) {
+
+      errorToast(error.message)
+    }
+
+    
 
    }
+
+   
 
    //!login için daha önce oluşturulmuş kullanıcı adıyla giriş yapmak için firebase kodu
 
    const login=async(email,password)=>{
-    await signInWithEmailAndPassword(auth, email,password)
-    
-    successToast("giriş başarılı")
 
-    navigate("/")
+    try {
+      await signInWithEmailAndPassword(auth, email,password)
+    
+      successToast("giriş başarılı")
+  
+      navigate("/")
+
+    } catch (error) {
+      
+      errorToast(error.message)
+    }
+    
    }
 
+    //!google ile giriş
+
+    //* https://firebase.google.com/docs/auth/web/google-signin?hl=tr
+
+
+    const signUpGooglE=()=>{
+
+      //? gooogle hesaplarıma ulaşmak için firebase kodu
+      const provider = new GoogleAuthProvider();
+
+      //? açılır pencerede google hesaplarının gelmesi için firebase metodu
+
+      signInWithPopup(auth, provider).then((res)=>{
+        successToast("google ile giriş başarılı");
+
+        navigate("/")
+      })
+
+
+
+    }
+
+
+
   return (
-    <YetkiContext.Provider value={{createKullanici, login}}>
+    <YetkiContext.Provider value={{createKullanici, login, signUpGooglE}}>
       {children}
     </YetkiContext.Provider>
   )

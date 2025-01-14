@@ -9,6 +9,9 @@ const useAuthCall = () => {
   const navigate=useNavigate()
   const {token}=useSelector((state) => state.auth);
 
+  const BASE_URL=import.meta.env.VITE_BASE_URL
+
+
   // Custom hook yazma kuralları
   //? 1-use Kelimesi ile başlar
   //? 2- return de { fonksiyonlar }, değişkense [ bilgiler ] gönderilmeli
@@ -20,7 +23,7 @@ const useAuthCall = () => {
 
     try {
       const { data } = await axios.post(
-        "https://11103.fullstack.clarusway.com/users",
+        `${BASE_URL}users`,
         userInfo
       );
       console.log("register içinde", data);
@@ -38,7 +41,7 @@ const useAuthCall = () => {
 
     try {
       const { data } = await axios.post(
-        "https://11103.fullstack.clarusway.com/auth/login",
+        `${BASE_URL}auth/login`,
         userInfo
       );
       console.log("login içinde", data);
@@ -55,7 +58,7 @@ const useAuthCall = () => {
 
     try {
       const { data } = await axios(
-        "https://11103.fullstack.clarusway.com/auth/logout",
+        `${BASE_URL}logout`,
         {
           headers:{
           Authorization:`Token ${token}`

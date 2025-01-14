@@ -6,11 +6,14 @@ import { Button } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import  Grid  from "@mui/material/Grid";
 import FirmCard from "./../components/FirmCard";
+import FirmModal from "../components/Modals/FirmModal";
 
 const Firms = () => {
   const { getStockData } = useStockCall();
   const { firms } = useSelector((state) => state.stock);
-  console.log(firms);
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   useEffect(() => {
     getStockData("firms");
@@ -23,6 +26,7 @@ const Firms = () => {
       </Typography>
 
       <Button
+      onClick={handleOpen}
         sx={{
           backgroundColor: "secondary.main",
           color: "white",
@@ -44,6 +48,7 @@ const Firms = () => {
           </Grid>
         ))}
       </Grid>
+      <FirmModal open={open} handleClose={handleClose} />
     </div>
   );
 };

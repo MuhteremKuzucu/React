@@ -7,6 +7,11 @@ import { TextField } from "@mui/material";
 import { useState } from "react";
 import useStockCall from "../../hook/useStockCall";
 import { useEffect } from "react";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
+import { useSelector } from "react-redux";
 
 const style = {
   position: "absolute",
@@ -20,8 +25,8 @@ const style = {
   p: 4,
 };
 
-export default function FirmModal({ open, handleClose, initialState }) {
-  const { postStockData, putStockData } = useStockCall();
+export default function ProductsModal({ open, handleClose, initialState }) {
+  const { postStockData, putStockData, getStockData } = useStockCall();
 
   const [info, setInfo] = useState(initialState);
 
@@ -31,17 +36,17 @@ export default function FirmModal({ open, handleClose, initialState }) {
   };
 
   const handleSubmit = () => {
-    // Database info bilgisini gönderme işlemi 
-    if (info._id){
+    // Database info bilgisini gönderme işlemi
+    if (info._id) {
       putStockData("firms", info);
-    }else{
+    } else {
       postStockData("firms", info);
     }
-   
-    
   };
 
-  console.log(initialState);
+  const { brands,categories} = useSelector((state) => state.stock);
+  
+ console.log("category",categories);
 
   //useEffect didUpdate metodu tarzında çalışması. dependancy arrayde başlangıç değeri verildiğinde güncelleme yapması.
   //  useEffect(()=>{setInfo(initialState)},[initialState])
@@ -62,32 +67,37 @@ export default function FirmModal({ open, handleClose, initialState }) {
             onSubmit={handleSubmit}
             sx={{ display: "flex", flexDirection: "column", gap: 2 }}
           >
+            <FormControl fullWidth>
+              <InputLabel id="demo-simple-select-label">Category</InputLabel>
+              <Select
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                value={info.name}
+                label="Category"
+                onChange={handleChange}
+              >
+                {categories.map((category) => (
+                  <MenuItem value={10}>{category.name}</MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+            <FormControl fullWidth>
+              <InputLabel id="demo-simple-select-label">Brand</InputLabel>
+              <Select
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                value={info.name}
+                label="Brand"
+                onChange={handleChange}
+              >
+                {brands.map((brand) => (
+                  <MenuItem value={10}>{brand.name}</MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+
             <TextField
-              label="Firm Name"
-              variant="outlined"
-              type="text"
-              name="name"
-              onChange={handleChange}
-              value={info.name}
-            />
-            <TextField
-              label="phone"
-              variant="outlined"
-              type="text"
-              name="phone"
-              onChange={handleChange}
-              value={info.phone}
-            />
-            <TextField
-              label="Address"
-              variant="outlined"
-              type="text"
-              name="address"
-              onChange={handleChange}
-              value={info.address}
-            />
-            <TextField
-              label="image"
+              label="Product Name*"
               variant="outlined"
               type="text"
               name="image"
@@ -96,9 +106,9 @@ export default function FirmModal({ open, handleClose, initialState }) {
             />
             <Button
               type="submit"
-              sx={{ backgroundColor: "secondary.main", color: "white", "&:hover":{backgroundColor: "secondary.main"}}}
+              sx={{ backgroundColor: "secondary.main", color: "white" ,"&:hover":{backgroundColor: "secondary.main",}}}
             >
-             {info._id ? "UPDATE" :"ADD FIRM"}
+              {info._id ? "UPDATE" : "ADD FIRM"}
             </Button>
           </Box>
         </Box>

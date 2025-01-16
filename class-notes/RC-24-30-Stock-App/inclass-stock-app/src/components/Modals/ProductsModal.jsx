@@ -36,17 +36,16 @@ export default function ProductsModal({ open, handleClose, initialState }) {
   };
 
   const handleSubmit = () => {
+    e.preventDefault();
     // Database info bilgisini gönderme işlemi
-    if (info._id) {
-      putStockData("firms", info);
-    } else {
-      postStockData("firms", info);
-    }
+
+    postStockData("products", info);
+    handleClose();
   };
 
-  const { brands,categories} = useSelector((state) => state.stock);
-  
- console.log("category",categories);
+  const { brands, categories } = useSelector((state) => state.stock);
+
+  console.log("category", categories);
 
   //useEffect didUpdate metodu tarzında çalışması. dependancy arrayde başlangıç değeri verildiğinde güncelleme yapması.
   //  useEffect(()=>{setInfo(initialState)},[initialState])
@@ -72,12 +71,13 @@ export default function ProductsModal({ open, handleClose, initialState }) {
               <Select
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
-                value={info.name}
+                value={info.categoryId}
                 label="Category"
+                name="categoryId"
                 onChange={handleChange}
               >
                 {categories.map((category) => (
-                  <MenuItem value={10}>{category.name}</MenuItem>
+                  <MenuItem value={category._id}>{category.name}</MenuItem>
                 ))}
               </Select>
             </FormControl>
@@ -86,12 +86,13 @@ export default function ProductsModal({ open, handleClose, initialState }) {
               <Select
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
-                value={info.name}
+                value={info.brandId}
                 label="Brand"
+                name="brandId"
                 onChange={handleChange}
               >
                 {brands.map((brand) => (
-                  <MenuItem value={10}>{brand.name}</MenuItem>
+                  <MenuItem value={brand._id}>{brand.name}</MenuItem>
                 ))}
               </Select>
             </FormControl>
@@ -100,13 +101,17 @@ export default function ProductsModal({ open, handleClose, initialState }) {
               label="Product Name*"
               variant="outlined"
               type="text"
-              name="image"
+              name="name"
               onChange={handleChange}
-              value={info.image}
+              value={info.name}
             />
             <Button
               type="submit"
-              sx={{ backgroundColor: "secondary.main", color: "white" ,"&:hover":{backgroundColor: "secondary.main",}}}
+              sx={{
+                backgroundColor: "secondary.main",
+                color: "white",
+                "&:hover": { backgroundColor: "secondary.main" },
+              }}
             >
               {info._id ? "UPDATE" : "ADD FIRM"}
             </Button>

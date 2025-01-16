@@ -17,13 +17,10 @@ const Products = () => {
   const handleOpen = () => setOpen(true);
   const handleClose = () => {
     setOpen(false);
-    setInitialState({ name: "", address: "", phone: "", image: "" });
+    setInitialState({ categoryId: "", brandId: "", name: "" });
   };
   const [initialState, setInitialState] = useState({
-    name: "",
-    address: "",
-    phone: "",
-    image: "",
+    categoryId: "", brandId: "", name: "" 
   });
   useEffect(() => {
     getStockData("products");

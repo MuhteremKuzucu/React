@@ -21,14 +21,14 @@ export default function ProductTable() {
       headerName: "Category",
       width: 200,
       // editable: true,
-      valueGetter: (value) => value.name,
+      valueGetter: ((value) => value?.name),
     },
     {
       field: "brandId",
       headerName: "Brand",
       width: 200,
       // editable: true,
-      valueGetter: (value) => value.name,
+      valueGetter: ((value) => value?.name),
     },
     {
       field: "name",

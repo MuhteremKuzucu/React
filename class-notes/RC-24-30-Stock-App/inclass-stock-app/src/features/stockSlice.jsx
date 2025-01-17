@@ -9,6 +9,7 @@ const stockSlice = createSlice({
     brands: [],
     categories: [],
     products: [],
+    purchases:[],
     sales: [],
   },
   reducers: {

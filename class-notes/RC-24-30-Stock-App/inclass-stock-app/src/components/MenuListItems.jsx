@@ -83,7 +83,7 @@ const selectedStyle={
                     width:"24px",
                     height:"24px",
                     mask:`url(${item.icon}) no-repeat center/contain`,
-                    bgcolor:"currentcolor",
+                    bgcolor:"currentColor",
                     mr:2
                 }}  ></Box>
                 {/* <Box sx={{

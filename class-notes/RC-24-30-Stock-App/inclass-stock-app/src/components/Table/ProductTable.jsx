@@ -52,13 +52,12 @@ export default function ProductTable() {
       width: 170,
       renderCell: (params) => (
         <DeleteIcon onClick={() => getDeleteData("products", params.id)} />
-        // console.log("params",params)
       ),
     },
   ];
 
   return (
-    <Box sx={{ height: 400, width: "100%" }}>
+    <Box sx={{ height: 700, width: "100%" }}>
       <DataGrid
         rows={products}
         columns={columns}
@@ -69,7 +68,7 @@ export default function ProductTable() {
             },
           },
         }}
-        pageSizeOptions={[5]}
+        pageSizeOptions={[5,10,15,20]}
         checkboxSelection
         disableRowSelectionOnClick
         getRowId={getRowId}

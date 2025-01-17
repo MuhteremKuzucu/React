@@ -26,7 +26,6 @@ export default function FirmModal({ open, handleClose, initialState }) {
   const [info, setInfo] = useState(initialState);
 
   const handleChange = (e) => {
-    console.log(e);
     setInfo({ ...info, [e.target.name]: e.target.value });
   };
 
@@ -40,8 +39,6 @@ export default function FirmModal({ open, handleClose, initialState }) {
    
     
   };
-
-  console.log(initialState);
 
   //useEffect didUpdate metodu tarzında çalışması. dependancy arrayde başlangıç değeri verildiğinde güncelleme yapması.
   //  useEffect(()=>{setInfo(initialState)},[initialState])

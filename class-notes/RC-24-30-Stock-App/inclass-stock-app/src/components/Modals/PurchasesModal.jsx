@@ -25,24 +25,29 @@ const style = {
   p: 4,
 };
 
-export default function ProductsModal({ open, handleClose, initialState }) {
+export default function PurchasesModal({ open, handleClose, initialState }) {
   const { postStockData, putStockData, getStockData } = useStockCall();
 
   const [info, setInfo] = useState(initialState);
 
   const handleChange = (e) => {
-    console.log(e);
+   
     setInfo({ ...info, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     // Database info bilgisini gönderme işlemi
-      postStockData("products", info);
-      handleClose()
+    if (info._id) {
+      putStockData("purchases", info);
+    } else {
+      postStockData("purchases", info);
+    }
+
+    handleClose();
   };
 
-  const { brands,categories} = useSelector((state) => state.stock);
+  const { brands, firms, products } = useSelector((state) => state.stock);
 
 
   //useEffect didUpdate metodu tarzında çalışması. dependancy arrayde başlangıç değeri verildiğinde güncelleme yapması.
@@ -65,17 +70,19 @@ export default function ProductsModal({ open, handleClose, initialState }) {
             sx={{ display: "flex", flexDirection: "column", gap: 2 }}
           >
             <FormControl fullWidth>
-              <InputLabel id="demo-simple-select-label">Category</InputLabel>
+              <InputLabel id="demo-simple-select-label">Firm</InputLabel>
               <Select
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
-                value={info.categoryId}
-                label="Category"
-                name="categoryId"
+                value={info?.firmId?._id || info?.firmId || ""}
+                label="Firm"
+                name="firmId"
                 onChange={handleChange}
               >
-                {categories.map((category,index) => (
-                  <MenuItem   key={index} value={category._id}>{category.name}</MenuItem>
+                {firms.map((firm, index) => (
+                  <MenuItem key={index} value={firm._id}>
+                    {firm.name}
+                  </MenuItem>
                 ))}
               </Select>
             </FormControl>
@@ -84,28 +91,65 @@ export default function ProductsModal({ open, handleClose, initialState }) {
               <Select
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
-                value={info.brandId}
+                value={info?.brandId?._id || info?.brandId || ""}
                 label="Brand"
                 name="brandId"
                 onChange={handleChange}
               >
-                {brands.map((brand,index) => (
-                  <MenuItem   key={index} value={brand._id}>{brand.name}</MenuItem>
+                {brands.map((brand, index) => (
+                  <MenuItem key={index} value={brand._id}>
+                    {brand.name}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+            <FormControl fullWidth>
+              <InputLabel id="demo-simple-select-label">Product</InputLabel>
+              <Select
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                value={info?.productId?._id || info?.productId || ""}
+                label="Product"
+                name="productId"
+                onChange={handleChange}
+              >
+                {products.map((product, index) => (
+                  <MenuItem key={index} value={product._id}>
+                    {product.name}
+                  </MenuItem>
                 ))}
               </Select>
             </FormControl>
 
             <TextField
-              label="Product Name*"
+              label="Quantity"
+              id="quantity"
+              name="quantity"
+              type="number"
               variant="outlined"
-              type="text"
-              name="name"
+              InputProps={{ inputProps: { min: 0 } }}
+              value={info?.quantity}
               onChange={handleChange}
-              value={info.name}
+              required
+            />
+            <TextField
+              label="Price"
+              id="price"
+              type="number"
+              variant="outlined"
+              name="price"
+              InputProps={{ inputProps: { min: 0 } }}
+              value={info?.price}
+              onChange={handleChange}
+              required
             />
             <Button
               type="submit"
-              sx={{ backgroundColor: "secondary.main", color: "white" ,"&:hover":{backgroundColor: "secondary.main",}}}
+              sx={{
+                backgroundColor: "secondary.main",
+                color: "white",
+                "&:hover": { backgroundColor: "secondary.main" },
+              }}
             >
               {info._id ? "UPDATE" : "ADD FIRM"}
             </Button>
